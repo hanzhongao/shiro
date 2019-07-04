@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="redisSessionCache" class="com.hza.ssm.util.cache.RedisCache">
+        <property name="redisConnectionFactory" ref="shiroSessionRedisConnectionFactory"/>
+    </bean>
+
+    <bean id="authenticationCache" class="com.hza.ssm.util.cache.RedisCache">
+        <property name="redisConnectionFactory" ref="shiroAuthenticationRedisConnectionFactory"/>
+    </bean>
+
+    <bean id="authorizationCache" class="com.hza.ssm.util.cache.RedisCache">
+        <property name="redisConnectionFactory" ref="shiroAuthorizationRedisConnectionFactory"/>
+    </bean>
+
+    <bean id="retryRedisCache" class="com.hza.ssm.util.cache.RedisCache">
+        <property name="redisConnectionFactory" ref="shiroRetryRedisConnectionFactory"/>
+    </bean>
+
+    <bean id="kickoutRedisCache" class="com.hza.ssm.util.cache.RedisCache">
+        <property name="redisConnectionFactory" ref="kickoutRedisConnectionFactory"/>
+    </bean>
+
+    <bean id="cacheManager" class="com.hza.ssm.util.cache.manager.RedisCacheManager">
+        <property name="cacheManagerMap">
+            <map>
+                <entry key="shiro-activeSessionCache" value-ref="redisSessionCache"/>
+                <entry key="authenticationCache" value-ref="authenticationCache"/>
+                <entry key="authorizationCache" value-ref="authorizationCache"/>
+                <entry key="retryCache" value-ref="retryRedisCache"/>
+                <entry key="kickoutCache" value-ref="kickoutRedisCache"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

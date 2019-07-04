@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义所有的SQL语句的映射， 对于本实体而言相关的所有的SQL代码都在此定义 -->
+<mapper namespace="com.hza.ssm.dao.IRoleDAO">   <!-- SSM整合的时候，这个命名空间异常重要 -->
+    <!-- 在进行数据查询的时候，发现有些查询的内容总在不断重复，所以可以定义为一个重复引用的标记 -->
+    <select id="findAllByMember" parameterType="String" resultType="String">
+        select rid from member_role where mid=#{mid}
+    </select>
+</mapper>
